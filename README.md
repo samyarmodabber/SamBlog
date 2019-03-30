@@ -1,0 +1,3 @@
+# vortaro
+
+Vortaro.ir
