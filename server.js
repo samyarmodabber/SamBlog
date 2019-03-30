@@ -30,10 +30,10 @@ db.authenticate()
     console.error("Unable to connect to the database:", err);
   });
 
-  // db.sync({force:true}); 
-// User.sync({force:true});
-// automatically sync all models.
-// db.sync();
+  // User.sync({force:true});
+  // automatically sync all models.
+  // db.sync();
+  db.sync({force:true}); 
 
 /**
  *@description Passport Middleware
