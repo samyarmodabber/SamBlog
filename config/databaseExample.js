@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = new Sequelize('blogDB', 'root', '123', {
+module.exports = new Sequelize('blogdb', 'root', '123', {
   host: 'localhost',
   dialect: 'mysql',
   // operatorsAliases: false,
