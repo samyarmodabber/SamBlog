@@ -33,7 +33,7 @@ db.authenticate()
   // User.sync({force:true});
   // automatically sync all models.
   // db.sync();
-  db.sync({force:true}); 
+  // db.sync({force:true}); 
 
 /**
  *@description Passport Middleware
