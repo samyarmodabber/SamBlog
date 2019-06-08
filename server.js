@@ -1,27 +1,9 @@
-const express = require("express");
+const express = require('express');
+const path = require('path');
 const app = express();
-const Sequelize = require("sequelize");
-const keys = require("./config/keys");
-const Post = require("./models/Post");
-const User = require("./models/User");
-const bodyParser = require("body-parser");
-const passport = require("passport");
 
 
-
-
-/**
- * @description
- */
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
-app.use(bodyParser.json());
-
-/**
- * @description
- */
-const db = require("./config/database");
+const db = require("./config/db");
 db.authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");
@@ -30,26 +12,41 @@ db.authenticate()
     console.error("Unable to connect to the database:", err);
   });
 
-  // User.sync({force:true});
-  // automatically sync all models.
-  // db.sync();
-  // db.sync({force:true}); 
+// Sync DB by Sequelize for test mode
+// const User = require("./models/User");
+// // User.sync({force:true});
+// const Profile = require("./models/Profile");
+// // Profile.sync({force:true});
+// const Article = require("./models/Article");
+// // Article.sync({force:true});
+// const Experience = require("./models/Experience");
+// // Experience.sync({force:true});
+// const Education = require("./models/Education");
+// // Education.sync({force:true});
+// const Skill = require("./models/Skill");
+// Skill.sync({force:true});
+//You can sync all database by below command
+// db.sync({force:true});
 
-/**
- *@description Passport Middleware
- */
-app.use(passport.initialize());
-require("./config/passport")(passport);
+// Init Middleware
+app.use(express.json({ extended: false }));
 
-/**
- * @deprecated Routes
- */
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/posts", require("./routes/api/posts"));
-app.use("/api/pages", require("./routes/api/pages"));
+// Define Routes
+app.use('/api/articles', require('./routes/api/articles'));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
 
-/**
- * @deprecated Define ports
- */
-const Port = process.env.PORT || 5000;
-app.listen(Port, () => console.log(`Server is running on port ${Port}`));
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
