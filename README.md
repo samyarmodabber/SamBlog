@@ -1,19 +1,17 @@
-# DevConnector 2.0
+# SamBlog version 2.0
 
-> Social network for developers
+> A CMS based on Express React SQL([sequeliz](http://docs.sequelizejs.com/))
 
-This is a MERN stack application from the "MERN Stack Front To Back" course on [Udemy](https://www.udemy.com/mern-stack-front-to-back/?couponCode=TRAVERSYMEDIA). It is a small social network app that includes authentication, profiles and forum posts.
+This is a SERN stack application make a CMS similar to WordPress.
+
 
 ## Quick Start
 
 ```
-# change default.json file in cofig folder
+# Make a database in MYSQL 
 
-# this file is located in config/default.json
+# change .env sample to .env acording to your database
 
-# add uri of your mongodb connection for example
-
- "mongoURI": "mongodb://localhost/dev-social",
  
 ```
 
@@ -37,8 +35,8 @@ npm run build
 
 ### Author
 
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
+Samyar Modabber
+[Samyar Modabber](https://github.com/samyarmodabber)
 
 ### Version
 
