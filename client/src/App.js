@@ -1,17 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Fragment } from 'react';
 import './App.css';
+//Redux
+import { Provider } from 'react-redux';
+import store from './store';
+//Router
+import { BrowserRouter as Router} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          I just do API for this App.
-        </p>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <header className='App-header'>
+            <p>I just do API for this App.</p>
+          </header>
+        </Fragment>
+      </Router>
+    </Provider>
   );
 }
 
