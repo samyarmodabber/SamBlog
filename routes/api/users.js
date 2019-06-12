@@ -83,7 +83,7 @@ const User = require('../../models/User');
         }
       );
     } catch (err) {
-      console.error(err.message);
+      console.error("ERROR", err.message);
       res.status(500).send('Server error');
     }
   }
