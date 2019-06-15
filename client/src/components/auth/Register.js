@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alertActions';
 import { register } from '../../actions/authActions';
 import PropTypes from 'prop-types';
-import {Redirect} from 'react-router-dom';
-
+import { Redirect } from 'react-router-dom';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -41,9 +40,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name='name'
                 type='text'
                 className='validate'
+                placeholder='Name'
                 onChange={e => onChange(e)}
               />
-              <label htmlFor='name'>Name</label>
             </div>
           </div>
           <div className='row'>
@@ -53,9 +52,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name='email'
                 type='email'
                 className='validate'
+                placeholder='Email'
                 onChange={e => onChange(e)}
               />
-              <label htmlFor='email'>Email</label>
             </div>
           </div>
           <div className='row'>
@@ -65,9 +64,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name='password'
                 type='password'
                 className='validate'
+                placeholder='Password'
                 onChange={e => onChange(e)}
               />
-              <label htmlFor='password'>Password</label>
             </div>
           </div>
           <div className='row'>
@@ -77,9 +76,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name='password2'
                 type='password'
                 className='validate'
+                placeholder='Repete Password'
                 onChange={e => onChange(e)}
               />
-              <label htmlFor='password2'>Repete Password</label>
             </div>
           </div>
           <input type='submit' className='btn' value='Register' />

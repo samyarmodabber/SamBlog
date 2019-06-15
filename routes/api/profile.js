@@ -54,9 +54,6 @@ router.post(
       check('status', 'Status is required')
         .not()
         .isEmpty(),
-      check('skills', 'Skills is required')
-        .not()
-        .isEmpty()
     ]
   ],
   async (req, res) => {
@@ -72,7 +69,6 @@ router.post(
       bio,
       status,
       githubusername,
-      skills,
       youtube,
       facebook,
       twitter,
@@ -95,10 +91,7 @@ router.post(
     if (linkedin) profileFields.linkedin = linkedin;
     if (instagram) profileFields.instagram = instagram;
 
-    let allSkills = [];
-    if (skills) {
-      allSkills = skills.split(',').map(skill => skill.trim());
-    }
+  
 
     try {
       let profile = await Profile.findOne({ where: { userId: req.user.id } });
@@ -115,6 +108,42 @@ router.post(
     }
   }
 );
+
+/**
+ * @version 2.0.0
+ * @author Samyar Modabber
+ * @route  UPDATE api/profile
+ * @description UPDATE the Profile by token
+ * @access   Private
+ */
+router.put('/', [
+  auth,
+    [
+      check('status', 'Status is required')
+        .not()
+        .isEmpty(),
+    ]
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    // Find profile of user
+    const userId = req.user.id;
+    const profile = await Profile.findOne({ where: { userId } });
+    if (!profile) {
+      res.status(400).json({ msg: 'You have to make a profile first!' });
+    }
+
+    // Update the Profile
+    await profile.update(req.body).then(updatedProfile => {
+      res.json({ msg: `Profile with ID ${updatedProfile.id} updated` });
+    });
+  } catch (err) {
+    res.status(500).send(`Server Error: ${err.message}`);
+  }
+});
 
 /**
  * @version 2.0.0
@@ -184,7 +213,7 @@ router.delete('/', auth, async (req, res) => {
  * @route  POST api/profile/experience
  * @description Add profile experience
  * @access   Private
- */
+ */ 
 router.post(
   '/experience',
   [
@@ -348,7 +377,7 @@ router.get('/:profileId/experience', async (req, res) => {
 /**
  * @version 2.0.0
  * @author Samyar Modabber
- * @route  Post api/profile/experience/:expId
+ * @route  Post api/profile/experience
  * @description Create an Education
  * @access   Private
  */

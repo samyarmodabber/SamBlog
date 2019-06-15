@@ -35,9 +35,9 @@ const Login = ({ login, isAuthenticated }) => {
                 name='email'
                 type='email'
                 className='validate'
+                placeholder='Email'
                 onChange={e => onChange(e)}
               />
-              <label htmlFor='email'>Email</label>
             </div>
           </div>
           <div className='row'>
@@ -47,9 +47,9 @@ const Login = ({ login, isAuthenticated }) => {
                 name='password'
                 type='password'
                 className='validate'
+                placeholder='Password'
                 onChange={e => onChange(e)}
               />
-              <label htmlFor='password'>Password</label>
             </div>
           </div>
           <input type='submit' className='btn' value='Login' />
