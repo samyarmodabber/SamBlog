@@ -6,8 +6,6 @@ import store from './store';
 //Router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layouts/Navbar';
-//Materialize
-import 'materialize-css/dist/css/materialize.min.css';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Alert from './components/layouts/Alert';
