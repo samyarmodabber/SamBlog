@@ -1,17 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Fragment,useEffect } from 'react';
 import './App.css';
+//Redux
+import { Provider } from 'react-redux';
+import store from './redux/store';
+//Router
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/layouts/Navbar';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Alert from './components/layouts/Alert';
+import setAuthToken from './utils/setAuthToken';
+import {loadUser} from './redux/actions/authActions'
+import Dashboard from './components/dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
+import CreateProfile from './components/profile/CreateProfile';
+import EditProfile from './components/profile/EditProfile';
+import AddExperience from './components/profile/AddExperience';
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 function App() {
+  useEffect(() => {
+   store.dispatch(loadUser())
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          I just do API for this App.
-        </p>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <header className='App-header'>
+            <Navbar />
+          </header>
+          <section className='container'>
+            <Alert/>
+            <Switch>
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/register' component={Register} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+              <PrivateRoute exact path='/edit-profile' component={EditProfile} />
+              <PrivateRoute exact path='/add-experience' component={AddExperience} />
+            </Switch>
+          </section>
+        </Fragment>
+      </Router>
+    </Provider>
   );
 }
 

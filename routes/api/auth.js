@@ -23,11 +23,10 @@ router.get('/', auth, async (req, res) => {
     });
     res.json(user);
   } catch (err) {
-    console.error(err.message);
+    // console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
-
 
 /**
  * @version 2.0.0
@@ -50,7 +49,9 @@ router.post(
     }
     const { email, password } = req.body;
     try {
-      let user = await User.findOne({where: {email} });
+
+      const user = await User.findOne({ where: { email } });
+
       if (!user) {
         return res
           .status(400)
