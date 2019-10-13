@@ -2,7 +2,7 @@ import React, { Fragment,useEffect } from 'react';
 import './App.css';
 //Redux
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './redux/store';
 //Router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layouts/Navbar';
@@ -10,7 +10,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Alert from './components/layouts/Alert';
 import setAuthToken from './utils/setAuthToken';
-import {loadUser} from './actions/authActions'
+import {loadUser} from './redux/actions/authActions'
 import Dashboard from './components/dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import CreateProfile from './components/profile/CreateProfile';

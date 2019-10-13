@@ -10,7 +10,7 @@ import {
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_REPOS
-} from './types';
+} from '../types';
 
 
 //////////////////////////////////////////     PROFILE      ////////////////////////////////////
@@ -77,6 +77,25 @@ export const createProfile = (
   }
 };
 
+// // Delete account & profile
+// export const deleteAccount = () => async dispatch => {
+//   if (window.confirm('Are you sure? This can NOT be undone!')) {
+//     try {
+//       await axios.delete('/api/profile');
+
+//       dispatch({ type: CLEAR_PROFILE });
+//       dispatch({ type: ACCOUNT_DELETED });
+
+//       dispatch(setAlert('Your account has been permanantly deleted'));
+//     } catch (err) {
+//       dispatch({
+//         type: PROFILE_ERROR,
+//         payload: { msg: err.response.statusText, status: err.response.status }
+//       });
+//     }
+//   }
+// };
+
 
 //////////////////////////////////////////     EXPERIENCE      /////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,6 +158,8 @@ export const deleteExperience = id => async dispatch => {
 };
 
 
+//////////////////////////////////////////     EDUCATION      /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Add Education
 export const addEducation = (formData, history) => async dispatch => {
@@ -149,7 +170,7 @@ export const addEducation = (formData, history) => async dispatch => {
       }
     };
 
-    const res = await axios.put('/api/profile/education', formData, config);
+    const res = await axios.post('/api/profile/education', formData, config);
 
     dispatch({
       type: UPDATE_PROFILE,
@@ -194,24 +215,7 @@ export const addEducation = (formData, history) => async dispatch => {
 //   }
 // };
 
-// // Delete account & profile
-// export const deleteAccount = () => async dispatch => {
-//   if (window.confirm('Are you sure? This can NOT be undone!')) {
-//     try {
-//       await axios.delete('/api/profile');
 
-//       dispatch({ type: CLEAR_PROFILE });
-//       dispatch({ type: ACCOUNT_DELETED });
-
-//       dispatch(setAlert('Your account has been permanantly deleted'));
-//     } catch (err) {
-//       dispatch({
-//         type: PROFILE_ERROR,
-//         payload: { msg: err.response.statusText, status: err.response.status }
-//       });
-//     }
-//   }
-// };
 
 
 

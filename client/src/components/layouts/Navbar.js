@@ -1,7 +1,7 @@
 import React, {  Fragment } from 'react';
 import { Link  } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/authActions';
+import { logout } from '../../redux/actions/authActions';
 import PropTypes from 'prop-types';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {  

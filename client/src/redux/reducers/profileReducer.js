@@ -7,7 +7,7 @@ import {
   GET_PROFILES,
   GET_REPOS,
 
-} from '../actions/types';
+} from '../types';
 
 const initialState = {
   profile: null,
