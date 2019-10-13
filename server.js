@@ -26,6 +26,7 @@ db.authenticate()
 // const Skill = require("./models/Skill");
 // Skill.sync({force:true});
 //You can sync all database by below command
+// db.sync();
 // db.sync({force:true});
 
 // Init Middleware

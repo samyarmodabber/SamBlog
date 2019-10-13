@@ -38,8 +38,8 @@ const User = require('../../models/User');
     const { name, email, password, sex, role, isActive } = req.body;
 
     try {
-      let user = await User.findOne({ where: { email } });
-      if (user) {
+      const userRegister = await User.findOne({ where: { email } });
+      if (userRegister) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'User already exists' }] });

@@ -29,9 +29,9 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   sex: {
-    type: Sequelize.ENUM('m', 'f', 'n'),
+    type: Sequelize.ENUM('male', 'female', 'notgiven'),
     allowNull: false,
-    defaultValue: 'n'
+    defaultValue: 'notgiven'
   },
   role: {
     type: Sequelize.ENUM('admin', 'writer', 'user'),
@@ -40,7 +40,8 @@ const User = db.define('user', {
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    allowNull: false,
+    defaultValue: false
   }
 });
 

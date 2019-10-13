@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator/check');
+const {check, validationResult} = require('express-validator/check');
 
 const User = require('../../models/User');
 
@@ -19,7 +19,7 @@ const User = require('../../models/User');
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id, {
-      attributes: { exclude: ['password'] }
+      attributes: {exclude: ['password']}
     });
     res.json(user);
   } catch (err) {
@@ -45,23 +45,30 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({errors: errors.array()});
     }
-    const { email, password } = req.body;
+    const {email, password} = req.body;
     try {
-
-      const user = await User.findOne({ where: { email } });
+      const user = await User.findOne(
+        {where: {email}},
+        {attributes: {exclude: ['password']}}
+      );
 
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Not find email or invalid password!' }] });
+          .json({errors: [{msg: 'Not find email or invalid password!'}]});
+      }
+      if (!user.isActive) {
+        return res
+          .status(400)
+          .json({errors: [{msg: 'You did not active by admin yet!'}]});
       }
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Not find email or invalid password!' }] });
+          .json({errors: [{msg: 'Not find email or invalid password!'}]});
       }
 
       const payload = {
@@ -72,10 +79,10 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 360000 },
+        {expiresIn: 360000},
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.json({token});
         }
       );
     } catch (err) {
