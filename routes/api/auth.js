@@ -49,7 +49,9 @@ router.post(
     }
     const { email, password } = req.body;
     try {
-      let user = await User.findOne({ where: { email } });
+
+      const user = await User.findOne({ where: { email } });
+
       if (!user) {
         return res
           .status(400)
