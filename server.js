@@ -4,15 +4,10 @@ const app = express();
 
 
 const db = require("./config/db");
-db.authenticate()
-  .then(() => {
-    console.log("Connection has been established successfully.");
-  })
-  .catch(err => {
-    console.error("Unable to connect to the database:", err);
-  });
-
 // Sync DB by Sequelize for test mode
+//You can sync all database by below command
+// db.sync();
+// db.sync({force:true});
 // const User = require("./models/User");
 // // User.sync({force:true});
 // const Profile = require("./models/Profile");
@@ -25,18 +20,13 @@ db.authenticate()
 // // Education.sync({force:true});
 // const Skill = require("./models/Skill");
 // Skill.sync({force:true});
-//You can sync all database by below command
-// db.sync();
-// db.sync({force:true});
 
 // Init Middleware
 app.use(express.json({ extended: false }));
 
 // Define Routes
-app.use('/api/articles', require('./routes/api/articles'));
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api',require('./routes/api'))
+
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
