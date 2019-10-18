@@ -9,7 +9,7 @@ import {
 } from '../types';
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
-import {setAlert} from '../actions/alertActions';
+import {setAlert} from './alertActions';
 
 /**
  * @description Load user by token
@@ -47,8 +47,8 @@ export const register = ({
   const body = JSON.stringify({name, email, password});
 
   try {
-    const res = await axios.post('/api/users', body, config);
-
+    await axios.post('/api/users/register', body, config);
+    dispatch(setAlert('You register successfuly. You should be active by admin', 'red'))
     history.push('/');
   } catch (err) {
     const {errors} = err.response.data;
