@@ -5,7 +5,7 @@ import { register } from '../../redux/actions/authActions';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, isAuthenticated, history }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,7 +23,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'pink', 3000);
     } else {
-      register({ name, email, password });
+      register({ name, email, password , history});
     }
   };
   if (isAuthenticated) {

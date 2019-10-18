@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator/check');
 const User = require('../../models/User');
 
 /**
- * @version 2.0.0
+ * @version 3.0.0
  * @author Samyar Modabber
  * @route POST api/users
  * @access Public
@@ -35,7 +35,7 @@ const User = require('../../models/User');
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password, sex, role, isActive } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       const userRegister = await User.findOne({ where: { email } });
@@ -56,9 +56,6 @@ const User = require('../../models/User');
         email,
         avatar,
         password,
-        sex,
-        role,
-        isActive
       });
 
       const salt = await bcrypt.genSalt(10);

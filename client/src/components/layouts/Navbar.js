@@ -31,9 +31,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <nav>
         <div className='nav-wrapper'>
           <Link to='/' className='brand-logo'>
-            SamBlog
+            Samyar Modabber
           </Link>
-          {!loading && (<Fragment>{isAuthenticated?authLinks:guestLinks}</Fragment>)}
+          {!loading && (<Fragment>{isAuthenticated?authLinks:null}</Fragment>)}
         </div>
       </nav>
     </Fragment>
